@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en, ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>NoteService</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<h1><img th:src="@{/images/NotePen.png}"><font size="10" face="comic sans ms">VENote</font></h1>
+<div id="plus"><a th:href="@{/create}" style="font: bold 25px Comic Sans MS; text-decoration: none; color: #2b72ff"  ><img th:src="@{/images/plus.png}"> Добавить заметку</a></div>
+
+<script>
+    function del(id) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("DELETE", "http://localhost:8080/delete/" + id , true);
+        xhr.send();
+    }
+    function search() {
+       let login = document.getElementById("search_field").value;
+       let xhttp = new XMLHttpRequest();
+        
+    }
+</script>
+<form ><input id="search_field"> <button>Поиск</button></form>
+<table >
+    <tr th:each="note : ${notes}" >
+        <td th:if="${note.head} == ''" style="font: 14px Comic Sans MS" th:text="${note.text}" th:attr="data-url=@{'/note/{id}'(id=${note.id})}"  onclick="document.location.href=this.getAttribute('data-url')"></td>
+        <td th:if="${note.head} != ''" style="font: bold 20px Comic Sans MS" th:text="${note.head}" width="50%" th:attr="data-url=@{'/note/{id}'(id=${note.id})}"  onclick="document.location.href=this.getAttribute('data-url')"></td>
+        <td style="font: 20px Comic Sans MS"  th:text="${note.date}" ></td>
+        <form action="/noteList"> <td th:data-note="${note.id}" onclick="del(this.getAttribute('data-note'))"width="5%" ><img th:src="@{/images/delete.png}" > </td></form>
+</tr>
+</table>
+
+</body>
+</html>

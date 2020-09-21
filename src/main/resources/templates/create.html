@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en, ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>NoteService</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<script>
+    function createUser() {
+        let head = document.getElementById("head").value;
+        let text = document.getElementById("text").value;
+        let date = new Date;
+        if ((head != 0) || (text != 0)){
+        let xhr = new XMLHttpRequest();   // new HttpRequest instance
+        xhr.open("POST", "http://localhost:8080/create");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify({head: head, text: text, date: date}));
+            document.location.href("/noteList")
+        }
+        else alert("Введите заголовок или текст заметки!")
+    }
+</script>
+<h1><img th:src="@{/images/NotePen.png}"><font size="10" face="comic sans ms">VENote</font></h1>
+<center><h2><font size="6" face="comic sans ms">Создание заметки</font></h2></center>
+<form action="#">
+     <input placeholder="Заголовок" style="font: 16px Comic Sans MS" class="input1" id="head">
+     <input placeholder="Текст заметки" style="font: 14px Comic Sans MS" type="text" class="input2" id="text">
+    <button style="font: bold 15px Comic Sans MS; color: white" class="button1" onclick="createUser()"  >Создать заметку</button>
+</form>
+</body>
+</html>
