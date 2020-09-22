@@ -131,11 +131,13 @@ table tbody tr td:hover {
     background: #a2c3dd;
     transition-duration: 0.2s;
 }
-.img{
+
+.img {
     position: absolute;
     top: 20.5%;
     left: 47.3%;
 }
+
 #Input {
     position: absolute;
     top: 21%;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>NoteService</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="SHORTCUT ICON" th:href="@{/images/favicon.ico}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
@@ -68,9 +69,9 @@
     }
 
 
-
 </script>
-<p style="font: 18px Comic Sans MS" class="p"><img th:src="@{/images/arrow-left-icon.png}">Заметок нет, создайте новые!</p>
+<p style="font: 18px Comic Sans MS" class="p"><img th:src="@{/images/arrow-left-icon.png}">Заметок нет, создайте новые!
+</p>
 <table id="myTable"> <!-- create table with notes -->
     <thead>
     <tr>
@@ -99,6 +100,6 @@
 </table>
 <button class="button2" onclick="sortTable()">Сортировка по дате</button>
 <img class="img" th:src="@{/images/search-icon.png}">
-<input type="text" id="Input" placeholder="Поиск по содержимому" onkeyup="search()" title="Окно поиска" >
+<input type="text" id="Input" placeholder="Поиск по содержимому" onkeyup="search()" title="Окно поиска">
 </body>
 </html>

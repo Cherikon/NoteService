@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>NoteService</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="SHORTCUT ICON" th:href="@{/images/favicon.ico}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
@@ -27,7 +28,8 @@
 <form th:action="@{/noteList}">
     <input placeholder="Заголовок" style="font: 16px Comic Sans MS" class="input1" id="head">
     <input placeholder="Текст заметки" style="font: 14px Comic Sans MS" type="text" class="input2" id="text">
-    <button style="font: bold 15px Comic Sans MS; color: white" class="button1" onclick="createUser(); location.reload()">Создать заметку
+    <button style="font: bold 15px Comic Sans MS; color: white" class="button1"
+            onclick="createUser(); location.reload()">Создать заметку
     </button>
 </form>
 </body>
