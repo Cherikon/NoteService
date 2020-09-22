@@ -1,36 +1,104 @@
 <!DOCTYPE HTML>
 <html lang="en, ru" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
+<head th:action="@{/noteList}">
+    <meta charset="UTF-8"/>
     <title>NoteService</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 <h1><img th:src="@{/images/NotePen.png}"><font size="10" face="comic sans ms">VENote</font></h1>
-<div id="plus"><a th:href="@{/create}" style="font: bold 25px Comic Sans MS; text-decoration: none; color: #2b72ff"  ><img th:src="@{/images/plus.png}"> Добавить заметку</a></div>
-
+<div id="plus"><a th:href="@{/create}" style="font: bold 25px Comic Sans MS; text-decoration: none; color: #2b72ff"><img
+        th:src="@{/images/plus.png}"> Добавить заметку</a></div>
 <script>
-    function del(id) {
-        let xhr = new XMLHttpRequest();
-        xhr.open("DELETE", "http://localhost:8080/delete/" + id , true);
-        xhr.send();
+    if (localStorage.getItem("reload") === "false") { //forced page reload
+        localStorage.removeItem("reload");
+    } else {
+        localStorage.setItem("reload", "false");
+        window.location = window.location;
     }
-    function search() {
-       let login = document.getElementById("search_field").value;
-       let xhttp = new XMLHttpRequest();
-        
-    }
-</script>
-<form ><input id="search_field"> <button>Поиск</button></form>
-<table >
-    <tr th:each="note : ${notes}" >
-        <td th:if="${note.head} == ''" style="font: 14px Comic Sans MS" th:text="${note.text}" th:attr="data-url=@{'/note/{id}'(id=${note.id})}"  onclick="document.location.href=this.getAttribute('data-url')"></td>
-        <td th:if="${note.head} != ''" style="font: bold 20px Comic Sans MS" th:text="${note.head}" width="50%" th:attr="data-url=@{'/note/{id}'(id=${note.id})}"  onclick="document.location.href=this.getAttribute('data-url')"></td>
-        <td style="font: 20px Comic Sans MS"  th:text="${note.date}" ></td>
-        <form action="/noteList"> <td th:data-note="${note.id}" onclick="del(this.getAttribute('data-note'))"width="5%" ><img th:src="@{/images/delete.png}" > </td></form>
-</tr>
-</table>
 
+    function sortTable() {    //sort notes by date
+        let table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("myTable");
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[0];
+                y = rows[i + 1].getElementsByTagName("TD")[0];
+                if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+
+    function del(id) {              //delete note by id
+        let xhr = new XMLHttpRequest();
+        xhr.open("DELETE", "http://localhost:8080/delete/" + id, true);
+        xhr.send();
+        document.location = "/noteList?";
+    }
+
+    function search() {     //search notes by input text
+        let input, filter, table, tr, td_text, td_head, i;
+        input = document.getElementById("Input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td_text = tr[i].getElementsByTagName("td")[1];
+            td_head = tr[i].getElementsByTagName("td")[2];
+            if (td_text || td_head) {
+                if ((td_text.innerHTML.toUpperCase().indexOf(filter) > -1) || (td_head.innerHTML.toUpperCase().indexOf(filter) > -1)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+
+</script>
+<p style="font: 18px Comic Sans MS" class="p"><img th:src="@{/images/arrow-left-icon.png}">Заметок нет, создайте новые!</p>
+<table id="myTable"> <!-- create table with notes -->
+    <thead>
+    <tr>
+        <th class="header">Заметка</th>
+        <th class="header">Дата создания</th>
+        <th class="header">Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="note : ${notes}">
+        <td style="display: none" th:text="${note.id}"></td>
+        <td style="display: none" th:text="${note.text}"></td>
+        <td th:if="${note.head} == ''" style="font: 14px Comic Sans MS" th:text="${note.text}"
+            th:attr="data-url=@{'/note/{id}'(id=${note.id})}"
+            onclick="document.location.href=this.getAttribute('data-url')"></td>
+        <!-- column with text of note if head does not exist -->
+        <td th:if="${note.head} != ''" style="font: bold 20px Comic Sans MS" th:text="${note.head}" width="50%"
+            th:attr="data-url=@{'/note/{id}'(id=${note.id})}"
+            onclick="document.location.href=this.getAttribute('data-url')"></td>  <!-- column with head of note -->
+        <td style="font: 20px Comic Sans MS; align-content: center" th:text="${note.date}"></td>
+        <td th:data-note="${note.id}" onclick="del(this.getAttribute('data-note'))" width="5%"><img
+                th:src="@{/images/delete.png}"></td>
+
+    </tr>
+    </tbody>
+</table>
+<button class="button2" onclick="sortTable()">Сортировка по дате</button>
+<img class="img" th:src="@{/images/search-icon.png}">
+<input type="text" id="Input" placeholder="Поиск по содержимому" onkeyup="search()" title="Окно поиска" >
 </body>
 </html>

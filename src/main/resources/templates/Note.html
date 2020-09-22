@@ -9,10 +9,11 @@
 <body>
 <h1><img th:src="@{/images/NotePen.png}"><font size="10" face="comic sans ms">VENote</font></h1>
 
-<a  th:href="@{/noteList}"><img th:src="@{/images/back-arrow.png}" th:border="1px"></a>
-<div id="element1" >
+<a th:href="@{/noteList}"><img th:src="@{/images/back-arrow.png}" th:border="1px"></a>
+<div id="element1">
     <p style="font: 18px Comic Sans MS">Название:
-        <td  th:text="${note.head}"></td></p>
+    <td th:text="${note.head}"></td>
+    </p>
 </div>
 <div id="element2">
     <p style="font: 18px Comic Sans MS">Текст заметки:</p>

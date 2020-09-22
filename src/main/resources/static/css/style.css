@@ -1,5 +1,5 @@
 h1 {
-    color:#ffffff;
+    color: #ffffff;
     background: #7dc9f1;
     margin: 0;
     padding: 20px 20px 20px 20px;
@@ -7,8 +7,9 @@ h1 {
 }
 
 h2 {
-    color:#2e388a;
+    color: #2e388a;
 }
+
 #element1 {
     position: absolute;
     top: 25%;
@@ -22,6 +23,7 @@ h2 {
     border: solid 2px #6a90ff;
     float: left;
 }
+
 #element2 {
     position: absolute;
     top: 40%;
@@ -34,6 +36,7 @@ h2 {
     border: solid 2px #6a90ff;
     float: left;
 }
+
 .input1 {
     position: absolute;
     top: 30%;
@@ -46,7 +49,8 @@ h2 {
     border: solid 2px #6a90ff;
     float: left;
 }
-.input2{
+
+.input2 {
     position: absolute;
     top: 45%;
     left: 30%;
@@ -58,12 +62,14 @@ h2 {
     border: solid 2px #6a90ff;
     float: left;
 }
-#plus{
+
+#plus {
     position: absolute;
-    top: 20%;
+    top: 22%;
     left: 20%;
 }
-.button1{
+
+.button1 {
     position: absolute;
     top: 75%;
     left: 45%;
@@ -73,24 +79,71 @@ h2 {
     border: solid 2px #2e388a;
     float: left;
 }
+
+.button2 {
+    position: absolute;
+    top: 21.3%;
+    left: 7%;
+    background: #c4f5ff;
+    padding: 15px;
+    border-radius: 20px;
+    border: solid 2px #05385a;
+}
+
 body {
     margin: 0;
     background-color: #ecf2ff;
 }
-table {width: 60%; position: absolute;
+
+.p {
+    position: absolute;
+    left: 23%;
+    top: 32%;
+}
+
+table {
+    width: 60%;
+    position: absolute;
     left: 20%;
     top: 28%;
     border-spacing: 4px;
-
+    white-space: normal;
 }
-table thead tr {color: #ffffff;}
-table thead tr td {border-radius: 4px 4px 0 0;
+
+table thead tr {
+    color: #ffffff;
+}
+
+table thead tr th {
+    border-radius: 4px 4px 0 0;
     background: #2e82c3;
-    width: 100%;}
-table tbody tr td {border: 1px solid #2e82c3;
+    width: 70%;
+}
+
+table tbody tr td {
+    border: 1px solid #2e82c3;
     border-radius: 4px;
     background: #cbdfef;
-    padding: 8px;}
-table tbody tr td:hover {background: #a2c3dd;
+    padding: 8px;
+}
+
+table tbody tr td:hover {
+    background: #a2c3dd;
     transition-duration: 0.2s;
+}
+.img{
+    position: absolute;
+    top: 20.5%;
+    left: 47.3%;
+}
+#Input {
+    position: absolute;
+    top: 21%;
+    left: 51%;
+    width: 25%;
+    height: 15px;
+    font-size: 16px;
+    padding: 12px 20px 12px 20px;
+    border-radius: 10px;
+    margin-bottom: 12px;
 }

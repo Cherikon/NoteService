@@ -7,8 +7,12 @@ import java.util.List;
 public interface NoteService {
 
     void create(Note note);
+
     List<Note> readAll();
-    Note read(int id);
+
+    Note find(int id);
+
     boolean update(Note note, int id);
+
     boolean delete(int id);
 }
